@@ -32,11 +32,11 @@
                 "DEVELOPMENT": true,
                 "DATABASE_CONNECTION_OPTIONS": {
                     "DATABASE": "MySQL",
-                    "DB_HOST": "",
+                    "DB_HOST": "192.168.0.156",
                     "DB_PORT": 3306,
-                    "DB_USER": "",
-                    "DB_PASSWD": "",
-                    "DB_NAME": "",                    
+                    "DB_USER": "root",
+                    "DB_PASSWD": "azure123",
+                    "DB_NAME": "appdb",                    
                     "CONNECT_TIMEOUT": 5,
                     "SECRET_KEY" : "abcdefghijklmnopqrstuvwxyz"
                 }

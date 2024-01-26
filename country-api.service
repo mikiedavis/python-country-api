@@ -1,0 +1,16 @@
+[Unit]
+Description=Gunicorn instance running on Linux
+[Service]
+WorkingDirectory=/home/mike/Apps/python-country-api
+ExecStart=/home/mike/Apps/python-country-api/gunicorn -b localhost:8000 app:app
+Restart=always
+# Restart service after 10 seconds if the service crashes:
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=gunicorn python country api
+User=mike
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target

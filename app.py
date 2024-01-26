@@ -61,7 +61,7 @@ def getdata():
 def  home():  
         
     BUCKET_NAME = "country-flag-image-bucket"
-    s3 = boto3.client('s3', aws_access_key_id='AKIA5QL5DXKIJE2GHW5F', aws_secret_access_key='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')
+    s3 = boto3.client('s3', aws_access_key_id='AKIA5QL5DXKIJE2GHW5F', aws_secret_access_key='')
     buckets_response = s3.list_buckets()
 
     #for bucket in buckets_response["Buckets"]:

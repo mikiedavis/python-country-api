@@ -42,7 +42,7 @@ db = Database(devconf)
 def getdata():
     try:
         countrycode = request.args.get('country', default='IND', type=str)
-        query = f"SELECT * FROM world_x.city WHERE COUNTRYCODE='{countrycode.upper()}'"
+        query = f"SELECT * FROM appdb.city WHERE COUNTRYCODE='{countrycode.upper()}'"
         records = db.run_query(query=query)
         response = get_response_msg(records, HTTPStatus.OK)
         db.close_connection()
@@ -57,7 +57,7 @@ def getdata():
 @app.route(f"{route_prefix}/getcitycodes", methods=['GET'])
 def getcitycodes():
     try:
-        query = f"SELECT distinct(COUNTRYCODE) FROM world.city"
+        query = f"SELECT distinct(COUNTRYCODE) FROM appdb.city"
         records = db.run_query(query=query)
         response = get_response_msg(records,  HTTPStatus.OK)
         db.close_connection()

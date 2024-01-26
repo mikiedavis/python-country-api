@@ -1,9 +1,11 @@
 http://127.0.0.1:8008/api/v1/health
-
-
 http://127.0.0.1:8008/api/v1/getcity?country=GBR
-
-
 
 severs will be private subnets
 edit security groups 
+
+Run
+python3 app.py
+pip install cryptography
+
+

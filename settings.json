@@ -32,11 +32,11 @@
                 "DEVELOPMENT": true,
                 "DATABASE_CONNECTION_OPTIONS": {
                     "DATABASE": "MySQL",
-                    "DB_HOST": "127.0.0.1",
+                    "DB_HOST": "",
                     "DB_PORT": 3306,
-                    "DB_USER": "root",
+                    "DB_USER": "",
                     "DB_PASSWD": "",
-                    "DB_NAME": "world_x",                    
+                    "DB_NAME": "",                    
                     "CONNECT_TIMEOUT": 5,
                     "SECRET_KEY" : "abcdefghijklmnopqrstuvwxyz"
                 }

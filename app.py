@@ -12,6 +12,7 @@ import requests
 
 host = os.environ.get('FLASK_SERVER_HOST', devconf.HOST)
 port = os.environ.get('FLASK_SERVER_PORT', devconf.PORT)
+
 version = str(devconf.VERSION).lower()
 url_prefix = str(devconf.URL_PREFIX).lower()
 route_prefix = f"/{url_prefix}/{version}"
@@ -61,7 +62,7 @@ def getdata():
 def  home():  
         
     BUCKET_NAME = "country-flag-image-bucket"
-    s3 = boto3.client('s3', aws_access_key_id='AKIA5QL5DXKIJE2GHW5F', aws_secret_access_key='')
+    s3 = boto3.client('s3', aws_access_key_id='AKIA5QL5DXKIJNW553MR', aws_secret_access_key='')
     buckets_response = s3.list_buckets()
 
     #for bucket in buckets_response["Buckets"]:
@@ -82,8 +83,10 @@ def  home():
         counter +=1
 
     # The API endpoint
-    #api_endpoint = f"http://{host}:{port}/api/v1/getcity?country=GBR"
-    api_endpoint = "http://api.midax.co.uk/api/v1/getcity?country=GBR"
+    api_endpoint = f"http://{host}:5000/api/v1/getcity?country=GBR"
+    print('port')
+    print(port)
+    #api_endpoint = "http://api.midax.co.uk/api/v1/getcity?country=GBR"
     # A GET request to the API
     response = requests.get(api_endpoint)
     country_data = response.json()

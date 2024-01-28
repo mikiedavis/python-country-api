@@ -1,7 +1,7 @@
 [Unit]
 Description=Gunicorn instance running on Linux
 [Service]
-WorkingDirectory=/home/mike/Apps/python-country-api
+WorkingDirectory= /home/mike/Apps/actions-runner/_work/python-country-api/python-country-api
 ExecStart=/home/mike/Apps/python-country-api/gunicorn -b localhost:8000 app:app
 Restart=always
 # Restart service after 10 seconds if the service crashes:

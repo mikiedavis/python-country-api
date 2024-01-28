@@ -60,13 +60,13 @@ def getdata():
 
 @app.route("/home", methods=['GET','POST'])
 def  home():  
-        
+
     BUCKET_NAME = "country-flag-image-bucket"
-    s3 = boto3.client('s3', aws_access_key_id='AKIA5QL5DXKIJNW553MR', aws_secret_access_key='')
+    s3 = boto3.client('s3', aws_access_key_id="AKIA5QL5DXKIJNW553MR", aws_secret_access_key=f'{devconf.SECRET_KEY}')
     buckets_response = s3.list_buckets()
 
-    #for bucket in buckets_response["Buckets"]:
-                #print(bucket)
+    #for bucket in buckets_response["Buckets"]:ß
+        #print(bucket)
     images = list()
 
     response = s3.list_objects_v2(Bucket=BUCKET_NAME)
@@ -84,8 +84,6 @@ def  home():
 
     # The API endpoint
     api_endpoint = f"http://{host}:5000/api/v1/getcity?country=GBR"
-    print('port')
-    print(port)
     #api_endpoint = "http://api.midax.co.uk/api/v1/getcity?country=GBR"
     # A GET request to the API
     response = requests.get(api_endpoint)

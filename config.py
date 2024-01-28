@@ -57,9 +57,8 @@ class ProductionConfig(Config):
 
 
 class DevelopmentConfig(Config):
-    '''
-    Configuration specific to development environment
-    '''
+    '''Configuration specific to development environment'''
+    
     ENV = CONF_DICT['env']['development']['ENV']
     DEBUG = CONF_DICT['env']['development']['DEBUG']
     DEVELOPMENT = CONF_DICT['env']['development']['DEVELOPMENT']
@@ -69,3 +68,4 @@ class DevelopmentConfig(Config):
     DB_PASSWD = CONF_DICT['env']['development']['DATABASE_CONNECTION_OPTIONS']['DB_PASSWD']
     DB_NAME = CONF_DICT['env']['development']['DATABASE_CONNECTION_OPTIONS']['DB_NAME']
     CONNECT_TIMEOUT = CONF_DICT['env']['development']['DATABASE_CONNECTION_OPTIONS']['CONNECT_TIMEOUT']
+    SECRET_KEY = CONF_DICT['env']['development']['DATABASE_CONNECTION_OPTIONS']['SECRET_KEY']

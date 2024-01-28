@@ -21,5 +21,3 @@ for obj in response["Contents"]:
         ExpiresIn=30)
         images.append(url)
     counter +=1
-
-#print(url)

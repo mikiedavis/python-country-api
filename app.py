@@ -1,4 +1,5 @@
 import os
+import logging
 import pymysql
 from http import HTTPStatus
 from flask_cors import CORS
@@ -19,8 +20,11 @@ route_prefix = f"/{url_prefix}/{version}"
 
 def create_app():
     app = Flask(__name__,template_folder='template')
-    cors = CORS(app, resources={f"{route_prefix}/*": {"origins": "*"}})
+    cors = CORS(app,origins=["http://127.0.0.1:8000"])
     app.config.from_object(devconf)
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
     return app
 
 def get_response_msg(data, status_code):
@@ -60,12 +64,11 @@ def getdata():
 
 @app.route("/home", methods=['GET','POST'])
 def  home():  
-
+    aws_region = 'eu-west-2'
     BUCKET_NAME = "country-flag-image-bucket"
-    s3 = boto3.client('s3', aws_access_key_id="AKIA5QL5DXKIJNW553MR", aws_secret_access_key=f'{devconf.SECRET_KEY}')
+    s3 = boto3.client('s3', region_name=aws_region, aws_access_key_id=f"{devconf.AWS_ACCESS_KEY_ID}", aws_secret_access_key=f"{devconf.SECRET_KEY}")
     buckets_response = s3.list_buckets()
-
-    #for bucket in buckets_response["Buckets"]:ß
+    #for bucket in buckets_response["Buckets"]:
         #print(bucket)
     images = list()
 
@@ -73,23 +76,22 @@ def  home():
 
     counter = 0
     for obj in response["Contents"]: 
-        #print(counter)
         if counter > 0:
             url = s3.generate_presigned_url(
             "get_object", 
             Params={"Bucket":BUCKET_NAME,  "Key": obj['Key']}, 
-            ExpiresIn=30)
+            ExpiresIn=60)
             images.append(url)
         counter +=1
 
     # The API endpoint
-    api_endpoint = f"http://{host}:5000/api/v1/getcity?country=GBR"
-    #api_endpoint = "http://api.midax.co.uk/api/v1/getcity?country=GBR"
+    # IN settings.json common, host port
+    api_endpoint = f"http://{host}:{port}/api/v1/getcity?country=GBR"
+
     # A GET request to the API
     response = requests.get(api_endpoint)
     country_data = response.json()
-
-    return render_template('home.html',imagelist=images, countries=country_data)
+    return render_template('home.html',imagelist=images,countries = country_data)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -165,8 +167,6 @@ def internal_server_error(e):
     return get_response_msg(str(e), HTTPStatus.INTERNAL_SERVER_ERROR)
 ## ==================================[ Error Handler Defined - End ]
 
-app.run(debug=True)
-
 if __name__ == '__main__':
     ## Launch the application 
-    app.run(host=host, port=port)
+    app.run(host='0.0.0.0', port=5000)

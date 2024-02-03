@@ -2,7 +2,7 @@
     "config": {
         "common": {
             "HOST": "127.0.0.1",
-            "PORT": 5000,
+            "PORT": 8100,
             "VERSION": "v1",
             "URL_PREFIX": "api",
             "DEFAULT_DEBUG": true,
@@ -38,7 +38,9 @@
                     "DB_PASSWD": "azure123",
                     "DB_NAME": "appdb",                    
                     "CONNECT_TIMEOUT": 5,
-                    "SECRET_KEY" : "f6VGb20Vgutq6es3H9Y7CVjw8RYAiMkYO514ASuY"
+                    "AWS_ACCESS_KEY_ID" : "AKIA5QL5DXKIJNW553MR",
+                    "SECRET_KEY" : "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",
+                    "AWS_REGION": "eu-west-2"
                 }
             }
         }

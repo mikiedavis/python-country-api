@@ -1,9 +1,12 @@
 
 import boto3
 
-BUCKET_NAME = "country-flag-image-bucket"
+from config import DevelopmentConfig as devconf
 
-s3 = boto3.client('s3', aws_access_key_id='', aws_secret_access_key='')
+BUCKET_NAME = "country-flag-image-bucket"
+aws_region = 'eu-west-2'
+s3 = boto3.client('s3', region_name=aws_region, aws_access_key_id=f"{devconf.AWS_ACCESS_KEY_ID}", aws_secret_access_key=f"{devconf.SECRET_KEY}")
+
 buckets_response = s3.list_buckets()
 
 #for bucket in buckets_response["Buckets"]:
@@ -21,3 +24,5 @@ for obj in response["Contents"]:
         ExpiresIn=30)
         images.append(url)
     counter +=1
+
+print(response)

@@ -20,7 +20,8 @@ route_prefix = f"/{url_prefix}/{version}"
 
 def create_app():
     app = Flask(__name__,template_folder='template')
-    cors = CORS(app,origins=["http://127.0.0.1:8000"])
+    cors = CORS(app, resources={f"{route_prefix}/*": {"origins": "*"}})
+    #cors = CORS(app,origins=["http://127.0.0.1:8000"])
     app.config.from_object(devconf)
     gunicorn_logger = logging.getLogger('gunicorn.error')
     app.logger.handlers = gunicorn_logger.handlers
@@ -71,6 +72,7 @@ def  home():
     #for bucket in buckets_response["Buckets"]:
         #print(bucket)
     images = list()
+    print(s3)
 
     response = s3.list_objects_v2(Bucket=BUCKET_NAME)
 
@@ -169,4 +171,4 @@ def internal_server_error(e):
 
 if __name__ == '__main__':
     ## Launch the application 
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host=host, port=port)

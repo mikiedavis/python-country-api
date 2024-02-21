@@ -1,4 +1,5 @@
 import pymysql
+import os
 
 
 class Database:
@@ -21,6 +22,9 @@ class Database:
 
     def __open_connection(self):
         """Connect to MySQL Database."""
+
+        dbhost = os.environ["dbhost"]
+
         try:
             if self.__conn is None:
                 self.__conn = pymysql.connect(
